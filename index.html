@@ -166,7 +166,7 @@ class Component extends DCLogic {
     const w = window.innerWidth;
     if (this.vw === w && this.vh) return;
     this.vw = w; this.vh = window.innerHeight;
-    this.introH = 2.2 * this.vh; this.perSec = 0.14 * this.vh;
+    this.introH = 1.5 * this.vh; this.perSec = 0.1 * this.vh;
     this.wEnd = this.introH + this.total * this.perSec;
     if (this.spacer) this.spacer.style.height = `${this.wEnd + 0.6 * this.vh}px`;
   }
@@ -205,9 +205,9 @@ class Component extends DCLogic {
     if (this.reduced) { this.o = oT; this.T = this.total; }
     else {
       const dO = (oT - this.o) * (1 - Math.exp(-dt * 3));
-      this.o += Math.sign(dO) * Math.min(Math.abs(dO), dt * 0.45);
+      this.o += Math.sign(dO) * Math.min(Math.abs(dO), dt * 0.7);
       if (Math.abs(oT - this.o) < 0.0005) this.o = oT;
-      this.T += clamp(tT - this.T, 0, dt * 3);
+      this.T += clamp(tT - this.T, 0, dt * 5);
     }
     const T = this.T, viewT = Math.min(T, tT);
     const fT = (T >= this.total - 0.01 && sy > this.wEnd) ? clamp((sy - this.wEnd) / (0.5 * vh)) : 0;
